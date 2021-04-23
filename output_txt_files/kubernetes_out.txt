@@ -1,18 +1,42 @@
-pgcorriente@pgcorriente-UX430UAR:~/git/DevOps_Microservices/project-ml-microservice-kubernetes$ ./run_kubernetes.sh 
+pgcorriente@pgcorriente-UX430UAR:~/tmp$ ./run_kubernetes.sh 
 deployment.apps/lesson5-final-app created
 NAME                                 READY   STATUS              RESTARTS   AGE
-lesson5-final-app-6c4ff7b86d-5ffvc   0/1     ContainerCreating   0          0s
+lesson5-final-app-6c4ff7b86d-v6xwp   0/1     ContainerCreating   0          3s
 error: unable to forward port because pod is not running. Current status=Pending
-pgcorriente@pgcorriente-UX430UAR:~/git/DevOps_Microservices/project-ml-microservice-kubernetes$ kubectl get pods
+pgcorriente@pgcorriente-UX430UAR:~/tmp$ kubectl get pods
 NAME                                 READY   STATUS              RESTARTS   AGE
-lesson5-final-app-6c4ff7b86d-5ffvc   0/1     ContainerCreating   0          21s
-pgcorriente@pgcorriente-UX430UAR:~/git/DevOps_Microservices/project-ml-microservice-kubernetes$ kubectl get pods
+lesson5-final-app-6c4ff7b86d-v6xwp   0/1     ContainerCreating   0          74s
+pgcorriente@pgcorriente-UX430UAR:~/tmp$ kubectl get pods
 NAME                                 READY   STATUS    RESTARTS   AGE
-lesson5-final-app-6c4ff7b86d-5ffvc   1/1     Running   0          117s
-pgcorriente@pgcorriente-UX430UAR:~/git/DevOps_Microservices/project-ml-microservice-kubernetes$ ./run_kubernetes.sh 
+lesson5-final-app-6c4ff7b86d-v6xwp   1/1     Running   0          2m9s
+pgcorriente@pgcorriente-UX430UAR:~/tmp$ ./run_kubernetes.sh 
 error: failed to create deployment: deployments.apps "lesson5-final-app" already exists
 NAME                                 READY   STATUS    RESTARTS   AGE
-lesson5-final-app-6c4ff7b86d-5ffvc   1/1     Running   0          2m5s
+lesson5-final-app-6c4ff7b86d-v6xwp   1/1     Running   0          2m13s
 Forwarding from 127.0.0.1:8000 -> 80
 Forwarding from [::1]:8000 -> 80
 Handling connection for 8000
+
+---
+
+pgcorriente@pgcorriente-UX430UAR:~/tmp$ kubectl logs lesson5-final-app-6c4ff7b86d-v6xwp
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 160-228-922
+[2021-04-23 05:11:28,513] INFO in app: JSON payload: 
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2021-04-23 05:11:28,542] INFO in app: Inference payload DataFrame: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2021-04-23 05:11:28,552] INFO in app: Scaling Payload: 
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2021-04-23 05:11:28,555] INFO in app: Prediction: 
+[20.35373177134412]
+127.0.0.1 - - [23/Apr/2021 05:11:28] "POST /predict HTTP/1.1" 200 -
