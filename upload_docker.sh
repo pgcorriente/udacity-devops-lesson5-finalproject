@@ -11,6 +11,7 @@ dockerpath=pgcorriente/lesson5-final-project
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 docker login --username=pgcorriente
+docker tag pgcorriente/lesson5-final-project pgcorriente/lesson5-final-project:latest
 
 # Step 3:
 # Push image to a docker repository
